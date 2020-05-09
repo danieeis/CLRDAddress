@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageId>DanDevelok.CLRDGAddress</PackageId>
+    <Authors>Daniel Tovar</Authors>
+    <Company>Daniel Tovar</Company>
+    <Product>CLRD and Google Address Data sources</Product>
+    <Description>This is a library for get the countries powered by CLRD (Unicode Common Locale Data Repository) v37 and addreesses sensitive by GAD (Google address data)</Description>
+    <Copyright>2020</Copyright>
+    <PackageTags>dandevelok clrd  gad address forms contries</PackageTags>
+    <PackageReleaseNotes>This is the initial release</PackageReleaseNotes>
+    <Version>1.0.1</Version>
+    <PackageIcon>icon.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="ReadMe.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="CLRD\ar.xml" />
+    <None Remove="CLRD\en.xml" />
+    <None Remove="CLRD\es.xml" />
+    <None Remove="CLRD\fr.xml" />
+    <None Remove="CLRD\it.xml" />
+    <None Remove="CLRD\pt.xml" />
+    <None Include="res\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="CLRD\ar.xml" />
+    <EmbeddedResource Include="CLRD\en.xml" />
+    <EmbeddedResource Include="CLRD\es.xml" />
+    <EmbeddedResource Include="CLRD\fr.xml" />
+    <EmbeddedResource Include="CLRD\it.xml" />
+    <EmbeddedResource Include="CLRD\pt.xml" />
+  </ItemGroup>
+
+</Project>
