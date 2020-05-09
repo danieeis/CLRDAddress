@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Xml;
 
 namespace CLRDGAddress
 {
@@ -33,7 +34,6 @@ namespace CLRDGAddress
             /// <returns></returns>
             public static string CountryByLanguage(string code, string ISOlanguage)
             {
-                var directoryCurrent = System.IO.Directory.GetCurrentDirectory();
                 var strLocalXmlFile = GetResourceFile(ISOlanguage.ToLower() + ".xml");
                 var xdoc = new System.Xml.XmlDocument();
                 xdoc.Load(strLocalXmlFile);
@@ -67,8 +67,7 @@ namespace CLRDGAddress
             {
                 string[] countries = new string[codes.Length];
                 var strLocalXmlFile = GetResourceFile(ISOlanguage.ToLower() + ".xml");
-                var xdoc = new System.Xml.XmlDocument();
-                xdoc.Load(strLocalXmlFile);
+                var xdoc = GetEntryXmlDoc(GetResourceFile(ISOlanguage.ToLower() + ".xml"));
                 for (int i = 0; i < codes.Length; i++)
                 {
                     countries[i] = xdoc.SelectSingleNode("//territory[@type='" + codes[i] + "']").InnerText;
@@ -77,19 +76,26 @@ namespace CLRDGAddress
                 return countries;
             }
 
-            static string GetResourceFile(string filename)
+            static byte[] GetResourceFile(string filename)
             {
-                string result = string.Empty;
-
                 using (Stream stream = typeof(CLRDGAddress.CLRD).Assembly.
                            GetManifestResourceStream("CLRDGAddress.CLRD." + filename))
                 {
-                    using (StreamReader sr = new StreamReader(stream))
-                    {
-                        result = sr.ReadToEnd();
-                    }
+                    if (stream == null) return null;
+                    byte[] buffer = new byte[stream.Length];
+                    stream.Read(buffer, 0, buffer.Length);
+                    return buffer;
                 }
-                return result;
+            }
+
+            public static XmlDocument GetEntryXmlDoc(byte[] Bytes)
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                using (MemoryStream ms = new MemoryStream(Bytes))
+                {
+                    xmlDoc.Load(ms);
+                }
+                return xmlDoc;
             }
         }
     }
