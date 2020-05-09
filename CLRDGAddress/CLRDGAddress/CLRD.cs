@@ -20,9 +20,7 @@ namespace CLRDGAddress
             public static string CountryByCulture(string code, string culture)
             {
                 var locale = new System.Globalization.CultureInfo(culture).TwoLetterISOLanguageName.ToLower();
-                var strLocalXmlFile = GetResourceFile(locale + ".xml");
-                var xdoc = new System.Xml.XmlDocument();
-                xdoc.Load(strLocalXmlFile);
+                var xdoc = GetEntryXmlDoc(GetResourceFile(locale + ".xml"));
                 var xn = xdoc.SelectSingleNode($"//territory[@type={code}]");
                 return xn.InnerText;
             }
@@ -34,9 +32,7 @@ namespace CLRDGAddress
             /// <returns></returns>
             public static string CountryByLanguage(string code, string ISOlanguage)
             {
-                var strLocalXmlFile = GetResourceFile(ISOlanguage.ToLower() + ".xml");
-                var xdoc = new System.Xml.XmlDocument();
-                xdoc.Load(strLocalXmlFile);
+                var xdoc = GetEntryXmlDoc(GetResourceFile(ISOlanguage.ToLower() + ".xml"));
                 var xn = xdoc.SelectSingleNode("//territory[@type='" + code + "']");
                 return xn.InnerText;
             }
@@ -47,9 +43,7 @@ namespace CLRDGAddress
             /// <returns></returns>
             public static string[] CountriesByLanguage(string ISOlanguage)
             {
-                var strLocalXmlFile = GetResourceFile(ISOlanguage.ToLower() + ".xml");
-                var xdoc = new System.Xml.XmlDocument();
-                xdoc.Load(strLocalXmlFile);
+                var xdoc = GetEntryXmlDoc(GetResourceFile(ISOlanguage.ToLower() + ".xml"));
                 System.Xml.XmlNodeList xn = xdoc.GetElementsByTagName("territory");
                 string[] countries = new string[xn.Count];
                 for (int i = 0; i < xn.Count; i++)
@@ -66,7 +60,6 @@ namespace CLRDGAddress
             public static string[] CountriesByLanguage(string ISOlanguage, params string[] codes)
             {
                 string[] countries = new string[codes.Length];
-                var strLocalXmlFile = GetResourceFile(ISOlanguage.ToLower() + ".xml");
                 var xdoc = GetEntryXmlDoc(GetResourceFile(ISOlanguage.ToLower() + ".xml"));
                 for (int i = 0; i < codes.Length; i++)
                 {
@@ -88,7 +81,7 @@ namespace CLRDGAddress
                 }
             }
 
-            public static XmlDocument GetEntryXmlDoc(byte[] Bytes)
+            static XmlDocument GetEntryXmlDoc(byte[] Bytes)
             {
                 XmlDocument xmlDoc = new XmlDocument();
                 using (MemoryStream ms = new MemoryStream(Bytes))
