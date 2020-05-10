@@ -22,18 +22,6 @@
       <PackagePath>\</PackagePath>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="CLRD\ar.xml" />
-    <None Remove="CLRD\en.xml" />
-    <None Remove="CLRD\es.xml" />
-    <None Remove="CLRD\fr.xml" />
-    <None Remove="CLRD\it.xml" />
-    <None Remove="CLRD\pt.xml" />
-    <None Include="res\icon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="CLRD\ar.xml" />

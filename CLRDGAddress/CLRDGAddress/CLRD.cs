@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
-using System.Text;
+using System.Linq;
 using System.Xml;
 
 namespace CLRDGAddress
 {
     public class CLRD
     {
+        static string ResourceBasePath = "CLRDGAddress.CLRD.";
+        static string ResourceNotFoundMessage = "CLRD source not found";
+        static string ArgumentExceptionMessage = "The params can't be null or empty";
         public class Countries
         {
 
@@ -19,10 +24,15 @@ namespace CLRDGAddress
             /// <returns></returns>
             public static string CountryByCulture(string code, string culture)
             {
+                if (string.IsNullOrEmpty(culture) || string.IsNullOrEmpty(code))
+                {
+                    throw new ArgumentException(ArgumentExceptionMessage);
+                }
                 var locale = new System.Globalization.CultureInfo(culture).TwoLetterISOLanguageName.ToLower();
                 var xdoc = GetEntryXmlDoc(GetResourceFile(locale + ".xml"));
-                var xn = xdoc.SelectSingleNode($"//territory[@type={code}]");
-                return xn.InnerText;
+                if (xdoc == null) throw new CultureNotFoundException(ResourceNotFoundMessage);
+                var xn = xdoc.SelectSingleNode($"//territory[@type='{code.ToUpper()}']");
+                return xn?.InnerText;
             }
             /// <summary>
             /// Country by Language ISO code
@@ -32,9 +42,14 @@ namespace CLRDGAddress
             /// <returns></returns>
             public static string CountryByLanguage(string code, string ISOlanguage)
             {
+                if (string.IsNullOrEmpty(ISOlanguage) || string.IsNullOrEmpty(code))
+                {
+                    throw new ArgumentException(ArgumentExceptionMessage);
+                }
                 var xdoc = GetEntryXmlDoc(GetResourceFile(ISOlanguage.ToLower() + ".xml"));
-                var xn = xdoc.SelectSingleNode("//territory[@type='" + code + "']");
-                return xn.InnerText;
+                if (xdoc == null) throw new CultureNotFoundException(ResourceNotFoundMessage);
+                var xn = xdoc.SelectSingleNode("//territory[@type='" + code.ToUpper() + "']");
+                return xn?.InnerText;
             }
             /// <summary>
             /// Get all the countries by language
@@ -43,7 +58,12 @@ namespace CLRDGAddress
             /// <returns></returns>
             public static string[] CountriesByLanguage(string ISOlanguage)
             {
+                if (string.IsNullOrEmpty(ISOlanguage))
+                {
+                    throw new ArgumentException(ArgumentExceptionMessage, "ISOlanguage");
+                }
                 var xdoc = GetEntryXmlDoc(GetResourceFile(ISOlanguage.ToLower() + ".xml"));
+                if (xdoc == null) throw new CultureNotFoundException(ResourceNotFoundMessage);
                 System.Xml.XmlNodeList xn = xdoc.GetElementsByTagName("territory");
                 string[] countries = new string[xn.Count];
                 for (int i = 0; i < xn.Count; i++)
@@ -59,20 +79,28 @@ namespace CLRDGAddress
             /// <param name="ISOlanguage">the iso language</param>
             public static string[] CountriesByLanguage(string ISOlanguage, params string[] codes)
             {
-                string[] countries = new string[codes.Length];
+                if (string.IsNullOrEmpty(ISOlanguage) || !codes.Any())
+                {
+                    throw new ArgumentException(ArgumentExceptionMessage);
+                }
                 var xdoc = GetEntryXmlDoc(GetResourceFile(ISOlanguage.ToLower() + ".xml"));
+                if (xdoc == null) throw new CultureNotFoundException(ResourceNotFoundMessage);
+                List<string> countries = new List<string>();
                 for (int i = 0; i < codes.Length; i++)
                 {
-                    countries[i] = xdoc.SelectSingleNode("//territory[@type='" + codes[i] + "']").InnerText;
+                    var country = xdoc?.SelectSingleNode("//territory[@type='" + codes[i].ToUpper() + "']")?.InnerText;
+                    if (!string.IsNullOrEmpty(country))
+                    {
+                        countries.Add(country);
+                    }
                 }
-
-                return countries;
+                return countries.ToArray();
             }
 
             static byte[] GetResourceFile(string filename)
             {
-                using (Stream stream = typeof(CLRDGAddress.CLRD).Assembly.
-                           GetManifestResourceStream("CLRDGAddress.CLRD." + filename))
+                using (Stream stream = typeof(CLRD).Assembly.
+                           GetManifestResourceStream(ResourceBasePath + filename))
                 {
                     if (stream == null) return null;
                     byte[] buffer = new byte[stream.Length];
@@ -83,6 +111,7 @@ namespace CLRDGAddress
 
             static XmlDocument GetEntryXmlDoc(byte[] Bytes)
             {
+                if (Bytes == null) return null;
                 XmlDocument xmlDoc = new XmlDocument();
                 using (MemoryStream ms = new MemoryStream(Bytes))
                 {
