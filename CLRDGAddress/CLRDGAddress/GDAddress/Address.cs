@@ -61,6 +61,7 @@ namespace CLRDGAddress.GDAddress
         public List<AddressField> GetAddressFields()
         {
             var AddressFields = new List<AddressField>();
+            if (!HasAddressFields) return AddressFields;
             foreach (var item in Require ?? Fmt)
             {
                 if (AddressFieldsDictionary.TryGetValue(item, out AddressField addressField))
@@ -71,19 +72,36 @@ namespace CLRDGAddress.GDAddress
             return AddressFields;
         }
 
-        public IEnumerable<string> GetSubRegionsNames()
+        public List<AddressField> GetAddressRequiredFields()
         {
-            return (SubNames ?? SubKeys ?? string.Empty).Split('~').AsEnumerable();
+            var AddressFields = new List<AddressField>();
+            if (string.IsNullOrEmpty(Require)) return AddressFields;
+            foreach (var item in Require)
+            {
+                if (AddressFieldsDictionary.TryGetValue(item, out AddressField addressField))
+                {
+                    AddressFields.Add(addressField);
+                }
+            }
+            return AddressFields;
         }
 
-        public IEnumerable<string> GetSubRegionsKeys()
+        public string[] GetSubRegionsNames()
         {
-            return (SubKeys ?? string.Empty).Split('~').AsEnumerable();
+            if (string.IsNullOrEmpty(SubNames) && string.IsNullOrEmpty(SubKeys)) return new string[0];
+            return (SubNames ?? SubKeys).Split('~');
         }
 
-        public IEnumerable<string> GetAllSubRegionIsoIds()
+        public string[] GetSubRegionsKeys()
         {
-            return (SubIsoids ?? string.Empty).Split('~').AsEnumerable();
+            if (string.IsNullOrEmpty(SubKeys)) return new string[0];
+            return SubKeys.Split('~');
+        }
+
+        public string[] GetAllSubRegionIsoIds()
+        {
+            if (string.IsNullOrEmpty(SubIsoids)) return new string[0];
+            return SubIsoids.Split('~');
         }
 
         public async Task<string> GetSubRegionIsoIds(string sub_key)
@@ -109,17 +127,24 @@ namespace CLRDGAddress.GDAddress
                 return GetAllSubRegionIsoIds().Any();
             }
         }
+        public bool HasAddressFields
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(Require) || !string.IsNullOrEmpty(Fmt);
+            }
+        }
 
-        public IEnumerable<KeyValuePair<string,string>> GetSubRegionsKeyName()
+        public Dictionary<string,string> GetSubRegionsKeyName()
         {
             var keys = GetSubRegionsKeys().ToArray();
             var names = GetSubRegionsNames().ToArray();
             if (keys.Any() && names.Any())
             {
-                List<KeyValuePair<string, string>> list = new List<KeyValuePair<string, string>>();
+                Dictionary<string, string> list = new Dictionary<string, string>();
                 for (int i = 0; i < keys.Count(); i++)
                 {
-                    list.Add(new KeyValuePair<string,string>(keys[i], names[i]));
+                    list.Add(keys[i], names[i]);
                 }
                 return list;
             }

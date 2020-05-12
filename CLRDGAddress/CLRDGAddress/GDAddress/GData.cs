@@ -16,10 +16,12 @@ namespace CLRDGAddress.GDAddress
     {
         [DataMember(Name = "sub_names")]
         public string SubNames { get; set; }
+
         [DataMember(Name = "sub_keys")]
         public string SubKeys { get; set; }
+
         [DataMember(Name = "sub_isoids")]
-        public string SubIsoIds { get; set; }
+        public string SubIsoids { get; set; }
 
         [DataMember(Name = "key")]
         public string Key { get; set; }
@@ -32,9 +34,6 @@ namespace CLRDGAddress.GDAddress
 
         [DataMember(Name = "zipex")]
         public string Zipex { get; set; }
-
-        [DataMember(Name = "sub_isoids")]
-        public string SubIsoids { get; set; }
 
         [DataMember(Name = "name")]
         public string Name { get; set; }
