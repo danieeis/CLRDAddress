@@ -11,9 +11,12 @@
     <Description>This is a library for get the countries powered by CLRD (Unicode Common Locale Data Repository) v37 and addreesses sensitive by GAD (Google address data)</Description>
     <Copyright>2020</Copyright>
     <PackageTags>dandevelok clrd  gad address forms contries</PackageTags>
-    <PackageReleaseNotes>This is the initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>Add method that get the countries code</PackageReleaseNotes>
     <Version>1.0.3</Version>
     <PackageIcon>res/icon.png</PackageIcon>
+    <Owners>Daniel Tovar</Owners>
+    <Summary>CLRD and GAD source</Summary>
+    <Title>CLRD and GAD source</Title>
   </PropertyGroup>
 
   <ItemGroup>
