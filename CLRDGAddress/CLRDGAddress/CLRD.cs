@@ -96,6 +96,22 @@ namespace CLRDGAddress
                 }
                 return countries.ToArray();
             }
+            /// <summary>
+            /// Get all countries code
+            /// </summary>
+            /// <returns></returns>
+            public static string[] CountriesCode()
+            {
+                var xdoc = GetEntryXmlDoc(GetResourceFile("en.xml"));
+                if (xdoc == null) throw new CultureNotFoundException(ResourceNotFoundMessage);
+                System.Xml.XmlNodeList xn = xdoc.GetElementsByTagName("territory");
+                string[] countries = new string[xn.Count];
+                for (int i = 0; i < xn.Count; i++)
+                {
+                    countries[i] = xn[i].Attributes["type"].Value;
+                }
+                return countries;
+            }
 
             static byte[] GetResourceFile(string filename)
             {

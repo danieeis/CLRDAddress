@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Xunit;
 
 namespace CLRDGAddressTest
@@ -64,6 +65,15 @@ namespace CLRDGAddressTest
 
             Assert.NotEmpty(countries);
             Assert.NotEmpty(countryVEFR);
+        }
+        [Fact]
+        public void GetCountriesCodeTest()
+        {
+            var codes = CLRDGAddress.CLRD.Countries.CountriesCode();
+
+            Assert.NotEmpty(codes);
+            Assert.Contains("VE", codes);
+            Assert.Contains("US", codes);
         }
     }
 }
