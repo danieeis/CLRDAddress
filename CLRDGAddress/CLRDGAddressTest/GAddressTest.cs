@@ -10,7 +10,7 @@ namespace CLRDGAddressTest
         public async void GetAddressesTest()
         {
             var addresses = await CLRDGAddress.AddressData.GetAddresses("VE");
-
+            
             var fields = addresses.GetAddressFields();
             
             var subkeyname = addresses.GetSubRegionsKeyName();
@@ -34,6 +34,7 @@ namespace CLRDGAddressTest
             Assert.True(addresses.HasSubDivisionsIsoId);
             Assert.True(addresses.HasAddressFields);
             Assert.NotNull(addresses.Id);
+
         }
 
         [Fact]

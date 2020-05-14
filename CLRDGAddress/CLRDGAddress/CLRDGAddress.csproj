@@ -12,7 +12,7 @@
     <Copyright>2020</Copyright>
     <PackageTags>dandevelok clrd  gad address forms contries</PackageTags>
     <PackageReleaseNotes>Add method that get the countries code</PackageReleaseNotes>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <PackageIcon>res/icon.png</PackageIcon>
     <Owners>Daniel Tovar</Owners>
     <Summary>CLRD and GAD source</Summary>

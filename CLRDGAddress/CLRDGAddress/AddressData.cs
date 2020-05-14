@@ -1,9 +1,9 @@
-﻿using CLRDGAddress.GDAddress;
+﻿using CLRDGAddress.Abstractions.GDAddress;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using CLRDGAddress.GDAddress.JsonService;
+using CLRDGAddress.Abstractions.GDAddress.JsonService;
 
 namespace CLRDGAddress
 {

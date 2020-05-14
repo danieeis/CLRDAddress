@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CLRDGAddress;
 
-namespace CLRDGAddress.GDAddress
+namespace CLRDGAddress.Abstractions.GDAddress
 {
     public class Address : GData
     {

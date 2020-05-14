@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization;
 
-namespace CLRDGAddress.GDAddress
+namespace CLRDGAddress.Abstractions.GDAddress
 {
-    public static class GDA
+    internal static class GDA
     {
         internal static string REST_URL = "https://chromium-i18n.appspot.com/";
         internal static string REST_ROUTE = "ssl-address/data/";
