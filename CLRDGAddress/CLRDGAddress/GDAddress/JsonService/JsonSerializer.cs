@@ -2,9 +2,9 @@
 using System.Runtime.Serialization.Json;
 using System.Text;
 
-namespace CLRDGAddress.GDAddress.JsonService
+namespace CLRDGAddress.Abstractions.GDAddress.JsonService
 {
-    public class JsonSerializer : ISerializer
+    internal class JsonSerializer : ISerializer
     {
         public string Serialize<TEntity>(TEntity entity)
             where TEntity : class, new()
