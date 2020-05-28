@@ -3,7 +3,7 @@
 .NET Standard 2.0 Address Library powered by CLDR and Google's address data.
 ============================================================================
 To use this library, add a using statement for CLRDGAddress and then can 
-call CLRD.Countries.CountriesByLanguage("es") or AddressData.GetAddresses("US")
+call CLRDGAddress.Countries.CountriesByLanguage("es") or CLRDGAddress.AddressData.GetAddresses("US")
 
 
 Features:

@@ -15,7 +15,7 @@ The dataset is  [stored locally](https://github.com/danieeis/CLRDAddress/tree/ma
 
 # Setup
 
- - Available on NuGet
+ - Available on NuGet https://www.nuget.org/packages/CLRDGAddress [![NuGet](https://img.shields.io/nuget/v/CLRDGAddress.svg?label=NuGet)](https://www.nuget.org/packages/CLRDGAddress)
 
 # Build
 
@@ -23,7 +23,8 @@ The dataset is  [stored locally](https://github.com/danieeis/CLRDAddress/tree/ma
 
 # API Usage
 
-Call CLRDGAddress.Countries for CLRD and CLRDGAddress.AddressData for Google Address Data to gain access to APIs
+To use this library, add a using statement for CLRDGAddress and then can 
+call CLRDGAddress.Countries.CountriesByLanguage("es") or CLRDGAddress.AddressData.GetAddresses("US")
 
 # Contribute
 

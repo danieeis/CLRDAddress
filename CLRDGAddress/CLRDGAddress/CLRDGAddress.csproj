@@ -12,11 +12,13 @@
     <Copyright>2020</Copyright>
     <PackageTags>clrd  gad address forms countries</PackageTags>
     <PackageReleaseNotes>Add method that get the countries code</PackageReleaseNotes>
-    <Version>1.0.6</Version>
-    <PackageIcon>res\icon.png</PackageIcon>
+    <Version>1.0.7</Version>
+    <PackageIconUrl>https://github.com/danieeis/CLRDAddress/blob/master/CLRDGAddress/CLRDGAddress/res/icon.png</PackageIconUrl>
     <Owners>Daniel Tovar</Owners>
     <Summary>CLRD and GAD source</Summary>
     <Title>CLRD and GAD source</Title>
+    <RepositoryUrl>https://github.com/danieeis/CLRDAddress</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/danieeis/CLRDAddress</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
