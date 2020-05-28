@@ -1,27 +1,26 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace CLRDGAddress.Abstractions.GDAddress
 {
-    [DataContract]
     public class SubDivision
     {
-        [DataMember(Name = "id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
-        [DataMember(Name = "key")]
+        [JsonPropertyName("key")]
         public string Key { get; set; }
 
-        [DataMember(Name = "lang")]
+        [JsonPropertyName("lang")]
         public string Lang { get; set; }
 
-        [DataMember(Name = "isoid")]
+        [JsonPropertyName("isoid")]
         public string IsoId { get; set; }
-        [DataMember(Name = "sub_keys")]
+        [JsonPropertyName("sub_keys")]
         public string SubKeys { get; set; }
-        [DataMember(Name = "zip")]
+        [JsonPropertyName("zip")]
         public string Zip { get; set; }
-        [DataMember(Name = "zipex")]
+        [JsonPropertyName("zipex")]
         public string Zipex { get; set; }
-        [DataMember(Name = "name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
     }
 }

@@ -3,13 +3,12 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using CLRDGAddress.Abstractions.GDAddress.JsonService;
+using System.Text.Json;
 
 namespace CLRDGAddress
 {
     public class AddressData
     {
-        private static ISerializer serializer = new JsonSerializer();
         /// <summary>
         /// Get the addresses of country
         /// </summary>
@@ -24,14 +23,23 @@ namespace CLRDGAddress
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                 Address Addresses = null;
-                var path = System.IO.Path.Combine(GDA.REST_ROUTE, code.ToUpper());
-                HttpResponseMessage response = await client.GetAsync(path);
-                
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    var data = await response.Content.ReadAsStringAsync();
-                    Addresses = serializer.Deserialize<Address>(data);
+                    var path = System.IO.Path.Combine(GDA.REST_ROUTE, code.ToUpper());
+                    HttpResponseMessage response = await client.GetAsync(path);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var data = await response.Content.ReadAsStringAsync();
+                        Addresses = JsonSerializer.Deserialize<Address>(data);
+                    }
+
                 }
+                catch (Exception)
+                {
+                    Console.WriteLine($"{DateTime.Now} | {typeof(AddressData).Assembly.GetName()} : An error has occurred when try to fetch Google Address Data");
+                }
+
                 return Addresses;
             } 
         }
@@ -50,13 +58,21 @@ namespace CLRDGAddress
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
-                var path = System.IO.Path.Combine(GDA.REST_ROUTE, $"{country_code.ToUpper()}/{sub_key}");
-                HttpResponseMessage response = await client.GetAsync(path);
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    var data = await response.Content.ReadAsStringAsync();
-                    subDivision = serializer.Deserialize<SubDivision>(data);
+                    var path = System.IO.Path.Combine(GDA.REST_ROUTE, $"{country_code.ToUpper()}/{sub_key}");
+                    HttpResponseMessage response = await client.GetAsync(path);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var data = await response.Content.ReadAsStringAsync();
+                        subDivision = JsonSerializer.Deserialize<SubDivision>(data);
+                    }
                 }
+                catch (Exception)
+                {
+                    Console.WriteLine($"{DateTime.Now} | {typeof(AddressData).Assembly.GetName()} : An error has occurred when try to fetch Google Address Data");
+                }
+
                 return subDivision.IsoId;
             }
         }

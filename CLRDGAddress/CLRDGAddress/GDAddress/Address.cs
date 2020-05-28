@@ -86,7 +86,28 @@ namespace CLRDGAddress.Abstractions.GDAddress
             }
             return AddressFields;
         }
+        public string GetSubRegionsName(string SubKeyOrIsoID)//D o Maracay
+        {
+            string name = string.Empty;
+            var subisos = GetAllSubRegionIsoIds().ToList();
+            if (subisos != null && subisos.IndexOf(SubKeyOrIsoID) != -1)
+            {
+                var index = subisos.IndexOf(SubKeyOrIsoID);
 
+                var names = GetSubRegionsNames();
+
+                if (names?.Length > index)
+                {
+                    name = names[index];
+                }
+            }
+            else
+            {
+                name = GetSubRegionsKeyName().FirstOrDefault(d => d.Key == SubKeyOrIsoID).Value ?? string.Empty;
+            }
+
+            return name;
+        }
         public string[] GetSubRegionsNames()
         {
             if (string.IsNullOrEmpty(SubNames) && string.IsNullOrEmpty(SubKeys)) return new string[0];
@@ -107,7 +128,7 @@ namespace CLRDGAddress.Abstractions.GDAddress
 
         public async Task<string> GetSubRegionIsoIds(string sub_key)
         {
-            string isoID = string.Empty;
+            string isoID;
             if (HasSubDivisionsIsoId)
             {
                 var isoids = this.GetAllSubRegionIsoIds().ToArray();

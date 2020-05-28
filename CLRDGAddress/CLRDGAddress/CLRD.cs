@@ -11,9 +11,9 @@ namespace CLRDGAddress
 {
     public static class Countries
     {
-        static string ResourceBasePath = "CLRDGAddress.CLRD.";
-        static string ResourceNotFoundMessage = "CLRD source not found";
-        static string ArgumentExceptionMessage = "The params can't be null or empty";
+        static readonly string ResourceBasePath = "CLRDGAddress.CLRD.";
+        static readonly string ResourceNotFoundMessage = "CLRD source not found";
+        static readonly string ArgumentExceptionMessage = "The params can't be null or empty";
         /// <summary>
         /// Country by Language ISO code
         /// </summary>

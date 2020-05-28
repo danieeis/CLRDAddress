@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,10 +10,10 @@
     <Product>CLRD and Google Address Data sources</Product>
     <Description>This is a library for get the countries powered by CLRD (Unicode Common Locale Data Repository) v37 and addreesses sensitive by GAD (Google address data)</Description>
     <Copyright>2020</Copyright>
-    <PackageTags>dandevelok clrd  gad address forms contries</PackageTags>
+    <PackageTags>clrd  gad address forms countries</PackageTags>
     <PackageReleaseNotes>Add method that get the countries code</PackageReleaseNotes>
-    <Version>1.0.5</Version>
-    <PackageIcon>res/icon.png</PackageIcon>
+    <Version>1.0.6</Version>
+    <PackageIcon>res\icon.png</PackageIcon>
     <Owners>Daniel Tovar</Owners>
     <Summary>CLRD and GAD source</Summary>
     <Title>CLRD and GAD source</Title>
@@ -33,6 +33,17 @@
     <EmbeddedResource Include="CLRD\fr.xml" />
     <EmbeddedResource Include="CLRD\it.xml" />
     <EmbeddedResource Include="CLRD\pt.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="res\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
 </Project>
