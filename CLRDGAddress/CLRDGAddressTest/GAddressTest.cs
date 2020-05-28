@@ -1,6 +1,7 @@
 ﻿using Xunit;
 using System.Linq;
 using System.Net.Http;
+using System;
 
 namespace CLRDGAddressTest
 {
@@ -63,6 +64,19 @@ namespace CLRDGAddressTest
             Assert.Null(addresses.Id);
             Assert.Null(addresses2.Id);
 
+        }
+
+        [Fact]
+        public async void GetSubRegionName()
+        {
+            var addresses = await CLRDGAddress.AddressData.GetAddresses("VE");
+            var name = addresses.GetSubRegionsName("E");
+            var name2 = addresses.GetSubRegionsName("Maracay");
+            var name3 = addresses.GetSubRegionsName("Barinas");
+
+            Assert.Equal("Barinas", name);
+            Assert.Empty(name2);
+            Assert.Equal("Barinas", name3);
         }
     }
 }
