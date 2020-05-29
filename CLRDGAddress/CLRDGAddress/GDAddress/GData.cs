@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace CLRDGAddress.Abstractions.GDAddress
 {
@@ -11,49 +10,49 @@ namespace CLRDGAddress.Abstractions.GDAddress
     }
     public partial class GData
     {
-        [JsonPropertyName("sub_names")]
+        [JsonProperty("sub_names")]
         public string SubNames { get; set; }
 
-        [JsonPropertyName("sub_keys")]
+        [JsonProperty("sub_keys")]
         public string SubKeys { get; set; }
 
-        [JsonPropertyName("sub_isoids")]
+        [JsonProperty("sub_isoids")]
         public string SubIsoids { get; set; }
 
-        [JsonPropertyName("key")]
+        [JsonProperty("key")]
         public string Key { get; set; }
 
-        [JsonPropertyName("languages")]
+        [JsonProperty("languages")]
         public string Languages { get; set; }
 
-        [JsonPropertyName("posturl")]
+        [JsonProperty("posturl")]
         public Uri Posturl { get; set; }
 
-        [JsonPropertyName("zipex")]
+        [JsonProperty("zipex")]
         public string Zipex { get; set; }
 
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("zip")]
+        [JsonProperty("zip")]
         public string Zip { get; set; }
 
-        [JsonPropertyName("upper")]
+        [JsonProperty("upper")]
         public string Upper { get; set; }
 
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public string Id { get; set; }
 
-        [JsonPropertyName("fmt")]
+        [JsonProperty("fmt")]
         public string Fmt { get; set; }
 
-        [JsonPropertyName("state_name_type")]
+        [JsonProperty("state_name_type")]
         public string StateNameType { get; set; }
 
-        [JsonPropertyName("require")]
+        [JsonProperty("require")]
         public string Require { get; set; }
 
-        [JsonPropertyName("lang")]
+        [JsonProperty("lang")]
         public string Lang { get; set; }
     }
 }

@@ -3,7 +3,6 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Text.Json;
 
 namespace CLRDGAddress
 {
@@ -31,7 +30,7 @@ namespace CLRDGAddress
                     if (response.IsSuccessStatusCode)
                     {
                         var data = await response.Content.ReadAsStringAsync();
-                        Addresses = JsonSerializer.Deserialize<Address>(data);
+                        Addresses = Newtonsoft.Json.JsonConvert.DeserializeObject<Address>(data);
                     }
 
                 }
@@ -65,7 +64,7 @@ namespace CLRDGAddress
                     if (response.IsSuccessStatusCode)
                     {
                         var data = await response.Content.ReadAsStringAsync();
-                        subDivision = JsonSerializer.Deserialize<SubDivision>(data);
+                        subDivision = Newtonsoft.Json.JsonConvert.DeserializeObject<SubDivision>(data);
                     }
                 }
                 catch (Exception)
