@@ -1,26 +1,26 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace CLRDGAddress.Abstractions.GDAddress
 {
     public class SubDivision
     {
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public string Id { get; set; }
-        [JsonPropertyName("key")]
+        [JsonProperty("key")]
         public string Key { get; set; }
 
-        [JsonPropertyName("lang")]
+        [JsonProperty("lang")]
         public string Lang { get; set; }
 
-        [JsonPropertyName("isoid")]
+        [JsonProperty("isoid")]
         public string IsoId { get; set; }
-        [JsonPropertyName("sub_keys")]
+        [JsonProperty("sub_keys")]
         public string SubKeys { get; set; }
-        [JsonPropertyName("zip")]
+        [JsonProperty("zip")]
         public string Zip { get; set; }
-        [JsonPropertyName("zipex")]
+        [JsonProperty("zipex")]
         public string Zipex { get; set; }
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
     }
 }
