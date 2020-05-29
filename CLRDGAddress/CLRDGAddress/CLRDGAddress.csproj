@@ -11,8 +11,8 @@
     <Description>This is a library for get the countries powered by CLRD (Unicode Common Locale Data Repository) v37 and addreesses sensitive by GAD (Google address data)</Description>
     <Copyright>2020</Copyright>
     <PackageTags>clrd  gad address forms countries</PackageTags>
-    <PackageReleaseNotes>Add method that get the countries code</PackageReleaseNotes>
-    <Version>1.0.7</Version>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Version>1.0.8</Version>
     <PackageIconUrl>https://github.com/danieeis/CLRDAddress/blob/master/CLRDGAddress/CLRDGAddress/res/icon.png</PackageIconUrl>
     <Owners>Daniel Tovar</Owners>
     <Summary>CLRD and GAD source</Summary>
@@ -36,14 +36,7 @@
     <EmbeddedResource Include="CLRD\it.xml" />
     <EmbeddedResource Include="CLRD\pt.xml" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Include="res\icon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
